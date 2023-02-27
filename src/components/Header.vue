@@ -24,7 +24,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .0898);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 }
 
 h2 {
@@ -37,7 +37,7 @@ h2 {
 }
 
 img {
-    width: 6.5rem;
+    width: 4.8rem;
     cursor: pointer;
 }
 </style>

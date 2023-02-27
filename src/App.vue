@@ -13,11 +13,8 @@
     --main-magenta: #EE2E5D;
   }
 
-  html,
-  body {
+  html {
     scroll-behavior: smooth;
-    height: 100%;
-    background: #f5e8e4
   }
 
   * {
