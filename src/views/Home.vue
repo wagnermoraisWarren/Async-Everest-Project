@@ -2,7 +2,6 @@
   <div class="home">
     <Header />
     <div class="flex">
-      <Background />
       <Welcome />
     </div>
 
