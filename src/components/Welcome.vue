@@ -5,14 +5,13 @@
         <ul>
             <li>
                 <router-link to="/register">
-                    <a href="">Cadastrar um carro</a>
+                   <button>Cadastar Carro</button>
                 </router-link>
             </li>
             <li>
-                <a href="">Editar carro listado</a>
-            </li>
-            <li>
-                <a href="">Listar carros cadastrados</a>
+                <router-link to="/carlist">
+                    <button>Listar Carro</button>
+                </router-link>
             </li>
         </ul>
     </div>
@@ -31,6 +30,16 @@ export default {
         flex-direction: column;
         justify-content: center;
         margin: 0 auto;
+        background-image: linear-gradient(to right, rgb(0, 0, 0, .6), rgba(0, 0, 0, .6)), url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=821&q=80');
+        background-size: cover;
+        background-position: left center;
+        background-repeat: no-repeat;
+        height: 88dvh;
+        width: 100%;
+    }
+
+    h2 {
+        text-align: center;
     }
 
     .nav-box {
@@ -39,19 +48,24 @@ export default {
 
     ul {
         display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        gap: 5rem;
     }
 
-    a {
-        color: rgba(0, 0, 0, .8);
-        font-size: 1.1rem;
-        font-weight: 500;
-        transition: 150ms;
+    button {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 700;
+        background: var(--main-magenta);
+        color: #fff;
+        cursor: pointer;
+        transition: 200ms;
     }
 
-    a:hover {
-        letter-spacing: 1px;
-        color: var(--main-magenta);
+    button:hover {
+        background: #bb0e36;
     }
 </style>

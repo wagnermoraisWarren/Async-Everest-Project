@@ -2,7 +2,7 @@
     <header>
         <div class="logo">
             <router-link to="/">
-                <img src="../assets/logo.png" alt="Logo">
+                <img src="https://lp.warren.com.br/hs-fs/hubfs/Logo_warren_white.png?noresize&width=130&name=Logo_warren_white.png" alt="Logo">
             </router-link>
         </div>
         <div class="title">
@@ -25,10 +25,11 @@ header {
     align-items: center;
     justify-content: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    background: var(--main-magenta);
 }
 
 h2 {
-    color: rgba(0, 0, 0, .7);
+    color: #fff;
 }
 
 .logo {
@@ -37,7 +38,7 @@ h2 {
 }
 
 img {
-    width: 4.8rem;
+    width: 10rem;
     cursor: pointer;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <HeaderList />
     <div class="flex">
       <!-- <Background /> -->
       <div class="form-box">
@@ -10,27 +10,27 @@
         <form action="#">
           <div class="input-box">
             <label for="plate">Placa do Carro</label>
-            <input type="text" class="plate" v-model="plate" v-mask="'AAA-####'">
+            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA-####'">
           </div>
           <div class="input-box">
             <label for="model">Modelo</label>
-            <input type="text" v-model="model">
+            <input type="text" v-model="carData.model">
           </div>
           <div class="input-box">
             <label for="color">Cor</label>
-            <input type="text" v-model="color">
+            <input type="text" v-model="carData.color">
           </div>
           <div class="input-box">
             <label for="year">Ano</label>
-            <input type="text" v-model="year">
+            <input type="text" v-model="carData.year">
           </div>
           <div class="select-input-box">
             <label for="conc">Concessionária</label>
-            <select name="list" id="conc" v-model="conc">
-              <option v-for="car in cars"> {{ car.name }} </option>
+            <select name="list" id="conc" v-model="carData.conc">
+              <option v-for="car in cars" :key="car.id"> {{ car.name }} </option>
             </select>
           </div>
-          <button type="submit">Cadastrar</button>
+          <button type="submit" @click="postCar">Cadastrar</button>
         </form>
       </div>
     </div>
@@ -38,62 +38,85 @@
 </template>
 
 <script>
-import Header from './Header.vue';
+import HeaderList from './HeaderList.vue';
 import Background from './Background.vue';
 export default {
     name: "Formulario",
 
     data() {
-      return {
-        plate: "",
-        model: "",
-        color: "",
-        year: "",
-        selected: false,
+      return { 
+        carData: {
+          plate: "",
+          model: "",
+          color: "",
+          year: "",
+        },
         cars: [
           {
+            id: 1,
             name: "Ford"
           },
 
           {
+            id: 2,
             name: "Chevrolet"
           },
 
-          {
+          { id: 3,
             name: "Volkswagen"
           },
 
           {
+            id: 4,
             name: "Toyota"
           },
 
           {
+            id: 5,
             name: "Hyundai"
           },
 
           {
+            id: 6,
             name: "Jeep"
           },
 
           {
+            id: 7,
             name: "BMW"
           },
 
           {
+            id: 8,
             name: "Mercedes"
           },
         ]
       };
     },
 
+    methods: {
+      postCar() {
+        try {
+          axios
+          .post("/api/list", this.carData)
+          .then(() => {
+            console.log("Carro cadastrado com sucesso");
+          })
+        } catch {
+          console.log(err);
+        }
+      },
+    },
+
     components: {
-      Header,
+      HeaderList,
       Background
     }
-  }
+
+}
 </script>
 
-<style>
+<style scoped>
   .flex {
     display: flex;
   }
