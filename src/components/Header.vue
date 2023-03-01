@@ -38,7 +38,7 @@ h2 {
 }
 
 img {
-    width: 10rem;
+    width: 7.5rem;
     cursor: pointer;
 }
 </style>

@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 header {
     padding: 1rem;
     display: flex;
@@ -40,6 +40,7 @@ h2 {
 
 button {
     background: transparent;
+    border: none;
     cursor: pointer;
 }
 </style>
