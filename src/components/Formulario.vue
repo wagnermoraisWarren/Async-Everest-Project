@@ -2,16 +2,44 @@
   <div>
     <HeaderList />
     <div class="flex">
-      <!-- <Background /> -->
       <div class="form-box">
         <div class="title-box">
           <h1>Cadastrar carro</h1>
         </div>
         <form action="#">
+
+          <!-- <p>Antes de cadastrar o veículo, informe.</p>
+          <div class="radio-box">
+            <div class="new">
+              <input 
+                type="radio"
+                name="inputR" 
+                id="newPlate" 
+                v-model="newPlate"
+              >
+              <label for="newPlate">Placa modelo novo (AAA1A11)</label>
+            </div>
+            <div class="old">
+              <input 
+                type="radio" 
+                name="inputR" 
+                id="oldPlate" 
+                v-model="oldPlate"
+              >
+              <label for="oldPlate">Placa modelo antigo (AAA-1111)</label>
+            </div>
+          </div>
+          <div class="radio-box">
+
+          </div> -->
           <div class="input-box">
             <label for="plate">Placa do Carro</label>
-            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA-####'">
+            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA#A##'">
           </div>
+          <!-- <div class="input-box" v-show="oldPlate = true">
+            <label for="plate">Placa do Carro</label>
+            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA-####'" placeholder="placa antiga">
+          </div> -->
           <div class="input-box">
             <label for="model">Modelo</label>
             <input type="text" v-model="carData.model">
@@ -30,7 +58,7 @@
               <option v-for="car in cars" :key="car.id"> {{ car.name }} </option>
             </select>
           </div>
-          <button type="submit" @click="postCar">Cadastrar</button>
+          <button type="submit" @click="postCar()">Cadastrar</button>
         </form>
       </div>
     </div>
@@ -38,8 +66,8 @@
 </template>
 
 <script>
+import axios from "axios";
 import HeaderList from './HeaderList.vue';
-import Background from './Background.vue';
 export default {
     name: "Formulario",
 
@@ -90,7 +118,9 @@ export default {
             id: 8,
             name: "Mercedes"
           },
-        ]
+        ],
+        // newPlate: false,
+        // oldPlate: false,
       };
     },
 
@@ -100,19 +130,17 @@ export default {
           axios
           .post("/api/list", this.carData)
           .then(() => {
-            console.log("Carro cadastrado com sucesso");
+            console.log("Carro cadastrado com sucesso!");
           })
         } catch {
-          console.log(err);
+            console.log(error);
         }
-      },
+      }
     },
 
     components: {
-      HeaderList,
-      Background
+      HeaderList
     }
-
 }
 </script>
 
@@ -122,7 +150,7 @@ export default {
   }
 
   .title-box {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     color: rgba(0, 0, 0, .8);
   }
 
@@ -132,11 +160,33 @@ export default {
     position: relative;
   }
 
+
+
+  .radio-box {
+    display: flex;
+    flex-direction: column;
+    align-self: left;
+    gap: 1rem;
+    padding: .50rem;
+  }
+
+  .old,
+  .new {
+    display: flex;
+    align-items: center;
+    gap: .50rem;
+  }
+
+  .input-box {
+    width: 100%;
+  }
+
   .select-input-box {
     display: flex;
     align-items: center;
     gap: 2rem;
     padding: 1rem;
+    width: 100%;
     margin-bottom: 2rem;
     background: #3f3f3f;
     border: none;
@@ -153,12 +203,12 @@ export default {
     text-transform: uppercase;
   }
 
-  label {
+  .input-box label {
     font-weight: 700;
     color: rgba(0, 0, 0, .7);
   }
 
-  input {
+  .input-box input {
     display: flex;
     width: 100%;
     padding: .50rem;
@@ -172,11 +222,11 @@ export default {
   }
 
   input:hover {
-    background: #f5f5f5;
+    background: #f0e1e1;
   }
 
   select {
-    padding: .20rem 1rem;
+    padding: .20rem 2rem;
     background: #f5f5f5;
     font-size: .90rem;
     outline: none;
@@ -190,11 +240,11 @@ export default {
     color: #fff;
     font-weight: 700;
     cursor: pointer;
-    transition: 400ms;
+    transition: 200ms;
   }
 
   button:hover {
-    background: #5a5151;
+    background: #342b2b;
     padding: .80rem 3rem;
   }
 </style>

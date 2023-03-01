@@ -4,9 +4,6 @@
         <div class="container">
             <div class="header">
                 <div class="id-column">
-                    <div class="car-id">
-                        <h3>Id</h3>
-                    </div>
                     <div class="car-model">
                         <h3>Modelo</h3>
                     </div>
@@ -15,14 +12,14 @@
                     <h3>Ações</h3>
                 </div>
             </div>
-            <div class="rows">
+            <div class="rows" v-for="car in carData" :key="car.id">
                 <div class="car-row">
                     <div class="id-column">
-                        <div class="car-number">
-                            <p>1</p>
+                        <div>
+                            <p> {{ car.model }} </p>
                         </div>
                         <div>
-                            <p>Civic</p>
+                            {{ car.id }}
                         </div>
                     </div>
                     <div class="button-box">
@@ -34,7 +31,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="car-row">
+                <!-- <div class="car-row">
                     <div class="id-column">
                         <div class="car-number">
                             <p>2</p>
@@ -57,7 +54,7 @@
                                  />
                         </button>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -71,28 +68,29 @@ export default {
 
     data() {
         return {
-            carData: {}
+            carData: []
         };
     },
 
     methods: {
         async getCars() {
             try {
-                await axios
-                .get("http://localhost:8080/api/list/")
-                .then((response) => {
-                    this.carData = response.data.cars;
-                    console.log(response);
-                });
+                const response = await axios.get("http://localhost:8080/api/list");
+                this.carData = response.data.cars;
+                console.log(response);
             } catch {
-                console.log(err);
+                console.log("teste");
             }
         }
     },
 
+    mounted() {
+        this.getCars();
+    },
+
     components: {
         HeaderList
-    }
+    },
 }
 </script>
 
