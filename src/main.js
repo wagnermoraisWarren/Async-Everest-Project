@@ -7,6 +7,7 @@ import { createServer, Model } from 'miragejs'
 Vue.config.productionTip = false
 Vue.use(VueMask);
 
+
 createServer ({
 
   models: {
@@ -14,17 +15,17 @@ createServer ({
   },
 
   seeds(server) {
-    server.create("car", { plate: "IYL-3973", model: "Ka", color: "Branco", year: "2018", conc: "Ford" })
-    server.create("car", { plate: "IYN-3997", model: "Onix", color: "Laranja", year: "2022", conc: "Chevrolet" })
-    server.create("car", { plate: "IWK-3369", model: "Civic", color: "Preto", year: "2019", conc: "Honda" })
+    server.create("car", { plate: "IYL-3973", model: "Ka", color: "Branco", year: "2018", conc: "Ford" });
+    // server.create("car", { plate: "IYN-3997", model: "Onix", color: "Laranja", year: "2022", conc: "Chevrolet" })
+    // server.create("car", { plate: "IWK-3369", model: "Civic", color: "Preto", year: "2019", conc: "Honda" })
   },
 
   routes() {
     this.namespace = 'api'
     
-    this.get('/list', (schema, request) => {
+    this.get('/list', (schema) => {
       return schema.cars.all()
-    }, { timing: 1000 } )
+    }, { timing: 1000 } );
 
     this.post('/list', (schema, request) => {
       let car = JSON.parse(request.requestBody)
