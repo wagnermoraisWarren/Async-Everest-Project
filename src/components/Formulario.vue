@@ -34,7 +34,7 @@
           </div> -->
           <div class="input-box">
             <label for="plate">Placa do Carro</label>
-            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA#A##'">
+            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA-###'">
           </div>
           <!-- <div class="input-box" v-show="oldPlate = true">
             <label for="plate">Placa do Carro</label>
@@ -58,7 +58,7 @@
               <option v-for="car in cars" :key="car.id"> {{ car.name }} </option>
             </select>
           </div>
-          <button type="submit" @click="postCar()">Cadastrar</button>
+          <button type="submit" @click.prevent="postCar()">Cadastrar</button>
         </form>
       </div>
     </div>
@@ -78,6 +78,7 @@ export default {
           model: "",
           color: "",
           year: "",
+          conc: ""
         },
         cars: [
           {
@@ -130,10 +131,15 @@ export default {
           axios
           .post("/api/list", this.carData)
           .then(() => {
+            this.carData.plate = ""
+            this.carData.model = ""
+            this.carData.color = ""
+            this.carData.year = ""
+            this.carData.conc = ""
             console.log("Carro cadastrado com sucesso!");
           })
         } catch {
-            console.log(error);
+            console.log("teste");
         }
       }
     },
@@ -159,9 +165,7 @@ export default {
     padding: 1rem 2rem;
     position: relative;
   }
-
-
-
+  
   .radio-box {
     display: flex;
     flex-direction: column;
