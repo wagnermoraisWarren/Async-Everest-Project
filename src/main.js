@@ -16,8 +16,6 @@ createServer ({
 
   seeds(server) {
     server.create("car", { plate: "IYL-3973", model: "Ka", color: "Branco", year: "2018", conc: "Ford" });
-    // server.create("car", { plate: "IYN-3997", model: "Onix", color: "Laranja", year: "2022", conc: "Chevrolet" })
-    // server.create("car", { plate: "IWK-3369", model: "Civic", color: "Preto", year: "2019", conc: "Honda" })
   },
 
   routes() {
@@ -49,10 +47,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faArrowLeft, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faCircleInfo, faClose, faPenToSquare, faTrash, faX, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faPenToSquare, faTrash, faArrowLeft)
+library.add(faPenToSquare, faTrash, faArrowLeft, faCircleInfo, faClose);
 
 /* add font awesome icon component */
 Vue.component('font-awesome-icon', FontAwesomeIcon)
