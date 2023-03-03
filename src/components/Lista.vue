@@ -3,7 +3,10 @@
         <HeaderList />
         <div class="container">
             <div class="header">
-                <div class="id-column">
+                <div class="title">
+                    <div class="car-id">
+                        <h3>Id</h3>
+                    </div>
                     <div class="car-model">
                         <h3>Modelo</h3>
                     </div>
@@ -14,15 +17,18 @@
             </div>
             <div class="rows" v-for="car in carData" :key="car.id">
                 <div class="car-row">
-                    <div class="id-column">
+                    <div class="row">
+                        <div>
+                           <p> {{ car.id }} </p>
+                        </div>
                         <div>
                             <p> {{ car.model }} </p>
                         </div>
-                        <div>
-                            {{ car.id }}
-                        </div>
                     </div>
                     <div class="button-box">
+                        <button>
+                            <font-awesome-icon class="fa-2x" icon="fa-solid fa-circle-info" @click="openModal" />
+                        </button>
                         <button>
                             <font-awesome-icon class="fa-2x" icon="fa-solid fa-pen-to-square" />
                         </button>
@@ -31,44 +37,23 @@
                         </button>
                     </div>
                 </div>
-                <!-- <div class="car-row">
-                    <div class="id-column">
-                        <div class="car-number">
-                            <p>2</p>
-                        </div>
-                        <div>
-                            <p>Focus</p>
-                        </div>
-                    </div>
-                    <div class="button-box">
-                        <button>
-                            <font-awesome-icon 
-                                class="fa-2x"
-                                icon="fa-solid fa-pen-to-square"
-                                 />
-                        </button>
-                        <button>
-                            <font-awesome-icon 
-                                class="fa-2x" 
-                                icon="fa-solid fa-trash"
-                                 />
-                        </button>
-                    </div>
-                </div> -->
             </div>
         </div>
+        <Modal v-show="isModal" @closeModal="isModal = false" :carData="carData" />
     </div>
 </template>
 
 <script>
 import axios from "axios"
+import Modal from "./Modal.vue";
 import HeaderList from "@/components/HeaderList.vue"
 export default {
     name: "Lista",
 
     data() {
         return {
-            carData: []
+            carData: {},
+            isModal: false
         };
     },
 
@@ -81,15 +66,34 @@ export default {
             } catch {
                 console.log("teste");
             }
+        },
+
+        openModal() {
+            this.isModal = true;
         }
     },
+
+    // computed: {
+    //         data: {
+    //                 get() {
+    //                     return {
+    //                         plate: this.carData.plate,
+    //                         model: this.carData.model,
+    //                         color: this.carData.color,
+    //                         year: this.carData.year,
+    //                         conc: this.carData.conc
+    //                     }
+    //                 }
+    //         }
+    // },
 
     mounted() {
         this.getCars();
     },
 
     components: {
-        HeaderList
+        HeaderList,
+        Modal
     },
 }
 </script>
@@ -101,7 +105,7 @@ export default {
         width: 90%;
         border: 1px solid #15151557;
         border-radius: 5px;
-        box-shadow: 2px 3px 5px rgba(0, 0, 0, .8);
+        z-index: -1;
     }
 
     .header {
@@ -112,15 +116,15 @@ export default {
         font-size: 1.2rem;
     }
 
-    .id-column {
+    .title {
         display: flex;
         align-items: center;
-        gap: 1rem;
-        padding: 0 1rem;
+        justify-content: space-between;
+        width: 25%;
     }
 
     .act {
-        padding: 0 4rem;
+        padding: 0 3rem;
     }
 
     .car-row {
@@ -129,11 +133,16 @@ export default {
         justify-content: space-between;
         padding: 2rem 1rem;
         margin: 2rem 0;
+        background: #ded3d3;
         font-size: 1.1rem;
-        background: #daf5eb;
         border: none;
         border-radius: 5px;
-        box-shadow: 2px 2px 3px rgba(0, 0, 0, .5);
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        width: 21%;
     }
 
     p {
