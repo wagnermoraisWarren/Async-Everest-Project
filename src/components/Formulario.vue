@@ -34,7 +34,7 @@
           </div> -->
           <div class="input-box">
             <label for="plate">Placa do Carro</label>
-            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA-###'">
+            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA-####'">
           </div>
           <!-- <div class="input-box" v-show="oldPlate = true">
             <label for="plate">Placa do Carro</label>
@@ -55,19 +55,21 @@
           <div class="select-input-box">
             <label for="conc">Concessionária</label>
             <select name="list" id="conc" v-model="carData.conc">
-              <option v-for="car in cars" :key="car.id"> {{ car.name }} </option>
+              <option v-for="car in brand" :key="car.id"> {{ car.name }} </option>
             </select>
           </div>
           <button type="submit" @click.prevent="postCar()">Cadastrar</button>
         </form>
       </div>
     </div>
+    <ConfirmacaoModal v-show="confirmacao" @closeModal="confirmacao = false"/>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import HeaderList from './HeaderList.vue';
+import ConfirmacaoModal from "./ConfirmacaoModal.vue";
 export default {
     name: "Formulario",
 
@@ -80,7 +82,7 @@ export default {
           year: "",
           conc: ""
         },
-        cars: [
+        brand: [
           {
             id: 1,
             name: "Ford"
@@ -120,6 +122,7 @@ export default {
             name: "Mercedes"
           },
         ],
+        confirmacao: false
         // newPlate: false,
         // oldPlate: false,
       };
@@ -131,6 +134,7 @@ export default {
           axios
           .post("/api/list", this.carData)
           .then(() => {
+            this.confirmacao = true
             this.carData.plate = ""
             this.carData.model = ""
             this.carData.color = ""
@@ -145,7 +149,8 @@ export default {
     },
 
     components: {
-      HeaderList
+      HeaderList,
+      ConfirmacaoModal
     }
 }
 </script>
