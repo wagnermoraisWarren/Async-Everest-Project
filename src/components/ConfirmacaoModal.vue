@@ -39,6 +39,7 @@ export default {
     width: 35%;
     border: none;
     border-radius: 5px;
+    background: #fff;
     box-shadow: 0 0 1px 1100px hsla(0, 5%, 25%, 1);
 }
 
