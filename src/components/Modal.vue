@@ -10,25 +10,25 @@
         <div class="column">
             <div class="column-data">
                 <h3>Modelo</h3>
-                <p> {{ carData.model }} </p>
+                <p> {{ carData[0].model }} </p>
             </div>
             <div class="column-data">
                 <h3>Placa</h3>
-                <p> {{ carData.plate }} </p>
+                <p> {{ carData[0].plate }} </p>
             </div>
             <div class="column-data">
                 <h3>Cor</h3>
-                <p> {{ carData.color }} </p>
+                <p> {{ carData[0].color }} </p>
             </div>
         </div>
         <div class="column">
             <div class="column-data">
                 <h3>Ano</h3>
-                <p> {{ carData.year }} </p>
+                <p> {{ carData[0].year }} </p>
             </div>
             <div class="column-data">
                 <h3>Concessionária</h3>
-                <p> {{ carData.conc }} </p>
+                <p> {{ carData[0].conc }} </p>
             </div>
         </div>
     </div>
@@ -50,7 +50,6 @@ export default {
 
     props: {
         carData: {
-            type: Object,
             required: true
         }
     }

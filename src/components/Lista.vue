@@ -27,7 +27,7 @@
                     </div>
                     <div class="button-box">
                         <button>
-                            <font-awesome-icon class="fa-2x" icon="fa-solid fa-circle-info" @click="openModal" />
+                            <font-awesome-icon class="fa-2x" icon="fa-solid fa-circle-info" @click="openModal()" />
                         </button>
                         <button>
                             <font-awesome-icon class="fa-2x" icon="fa-solid fa-pen-to-square" />
@@ -52,7 +52,7 @@ export default {
 
     data() {
         return {
-            carData: {},
+            carData: [],
             isModal: false
         };
     },
@@ -64,7 +64,7 @@ export default {
                 this.carData = response.data.cars;
                 console.log(response);
             } catch {
-                console.log("teste");
+                console.log('teste');
             }
         },
 
@@ -72,20 +72,6 @@ export default {
             this.isModal = true;
         }
     },
-
-    // computed: {
-    //         data: {
-    //                 get() {
-    //                     return {
-    //                         plate: this.carData.plate,
-    //                         model: this.carData.model,
-    //                         color: this.carData.color,
-    //                         year: this.carData.year,
-    //                         conc: this.carData.conc
-    //                     }
-    //                 }
-    //         }
-    // },
 
     mounted() {
         this.getCars();

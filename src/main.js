@@ -16,6 +16,8 @@ createServer ({
 
   seeds(server) {
     server.create("car", { plate: "IYL-3973", model: "Ka", color: "Branco", year: "2018", conc: "Ford" });
+    server.create("car", { plate: "IYL-3204", model: "Onix", color: "Preto", year: "2020", conc: "Chevrolet" });
+    server.create("car", { plate: "IYL-2306", model: "Fox", color: "Vermelho", year: "2012", conc: "Volkswagen" });
   },
 
   routes() {
