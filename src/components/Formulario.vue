@@ -7,39 +7,10 @@
           <h1>Cadastrar carro</h1>
         </div>
         <form action="#">
-
-          <!-- <p>Antes de cadastrar o veículo, informe.</p>
-          <div class="radio-box">
-            <div class="new">
-              <input 
-                type="radio"
-                name="inputR" 
-                id="newPlate" 
-                v-model="newPlate"
-              >
-              <label for="newPlate">Placa modelo novo (AAA1A11)</label>
-            </div>
-            <div class="old">
-              <input 
-                type="radio" 
-                name="inputR" 
-                id="oldPlate" 
-                v-model="oldPlate"
-              >
-              <label for="oldPlate">Placa modelo antigo (AAA-1111)</label>
-            </div>
-          </div>
-          <div class="radio-box">
-
-          </div> -->
           <div class="input-box">
             <label for="plate">Placa do Carro</label>
             <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA-####'">
           </div>
-          <!-- <div class="input-box" v-show="oldPlate = true">
-            <label for="plate">Placa do Carro</label>
-            <input type="text" class="plate" v-model="carData.plate" v-mask="'AAA-####'" placeholder="placa antiga">
-          </div> -->
           <div class="input-box">
             <label for="model">Modelo</label>
             <input type="text" v-model="carData.model">
@@ -85,46 +56,89 @@ export default {
         brand: [
           {
             id: 1,
-            name: "Ford"
+            name: "Audi"
           },
 
           {
             id: 2,
-            name: "Chevrolet"
-          },
-
-          { id: 3,
-            name: "Volkswagen"
-          },
-
-          {
-            id: 4,
-            name: "Toyota"
-          },
-
-          {
-            id: 5,
-            name: "Hyundai"
-          },
-
-          {
-            id: 6,
-            name: "Jeep"
-          },
-
-          {
-            id: 7,
             name: "BMW"
           },
 
           {
-            id: 8,
+            id: 3,
+            name: "Caoa Chery"
+          },
+
+          {
+            id: 4,
+            name: "Chevrolet"
+          },
+
+          {
+            id: 5,
+            name: "Citroën"
+          },
+
+          {
+            id: 6,
+            name: "Fiat"
+          },
+
+          {
+            id: 7,
+            name: "Ford"
+          },
+
+          { id: 8,
+            name: "Honda"
+          },
+
+          {
+            id: 9,
+            name: "Hyundai"
+          },
+
+          {
+            id: 10,
+            name: "Jeep"
+          },
+
+          {
+            id: 11,
             name: "Mercedes"
           },
+
+          {
+            id: 12,
+            name: "Mitsubishi"
+          },
+
+          {
+            id: 13,
+            name: "Peugeot"
+          },
+
+          {
+            id: 14,
+            name: "Renault"
+          },
+
+          {
+            id: 15,
+            name: "Toyota"
+          },
+
+          {
+            id: 16,
+            name: "Volkswagen"
+          },
+
+          {
+            id: 17,
+            name: "Volvo"
+          },
         ],
-        confirmacao: false
-        // newPlate: false,
-        // oldPlate: false,
+        confirmacao: false,
       };
     },
 
@@ -235,10 +249,14 @@ export default {
   }
 
   select {
-    padding: .20rem 2rem;
+    padding: .20rem;
     background: #f5f5f5;
     font-size: .90rem;
     outline: none;
+  }
+
+  option {
+    font-weight: 500;
   }
 
   button {
