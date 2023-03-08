@@ -40,7 +40,7 @@ export default {
         background-size: cover;
         background-position: 100% 45%;
         background-repeat: no-repeat;
-        height: 88dvh;
+        height: 88%;
         width: 100%;
     }
 
