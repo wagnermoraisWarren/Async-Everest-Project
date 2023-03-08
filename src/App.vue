@@ -17,6 +17,10 @@
     scroll-behavior: smooth;
   }
 
+  body {
+    height: 100vh;
+  }
+
   * {
     margin: 0;
     padding: 0;

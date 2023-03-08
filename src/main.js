@@ -15,7 +15,7 @@ createServer ({
   },
 
   seeds(server) {
-    server.create("car", { plate: "IYL-3973", model: "Ka", color: "Branco", year: "2018", conc: "Ford" });
+    server.create("car", { plate: "IYL-3973", model: "Civic", color: "Branco", year: "2018", conc: "Ford" });
     server.create("car", { plate: "IYL-3204", model: "Onix", color: "Preto", year: "2020", conc: "Chevrolet" });
     server.create("car", { plate: "IYL-2306", model: "Fox", color: "Vermelho", year: "2012", conc: "Volkswagen" });
   },
@@ -39,6 +39,12 @@ createServer ({
 
       return car.update(data)
     }, { timing: 2000 })
+
+    this.delete('/list/:id', (schema, request) => {
+      let id = request.params.id
+
+      return schema.reminders.find(id).destroy()
+    })
   }
 })
 
