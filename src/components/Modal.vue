@@ -10,25 +10,25 @@
         <div class="column">
             <div class="column-data">
                 <h3>Modelo</h3>
-                <p> {{ carData[0].model }} </p>
+                <p> {{ carData.model }} </p>
             </div>
             <div class="column-data">
                 <h3>Placa</h3>
-                <p> {{ carData[0].plate }} </p>
+                <p> {{ carData.plate }} </p>
             </div>
             <div class="column-data">
                 <h3>Cor</h3>
-                <p> {{ carData[0].color }} </p>
+                <p> {{ carData.color }} </p>
             </div>
         </div>
         <div class="column">
             <div class="column-data">
                 <h3>Ano</h3>
-                <p> {{ carData[0].year }} </p>
+                <p> {{ carData.year }} </p>
             </div>
             <div class="column-data">
                 <h3>Concessionária</h3>
-                <p> {{ carData[0].conc }} </p>
+                <p> {{ carData.conc }} </p>
             </div>
         </div>
     </div>
@@ -45,7 +45,7 @@ export default {
     methods: {
         closeModal() {
             this.$emit("closeModal");
-        }
+        },
     },
 
     props: {

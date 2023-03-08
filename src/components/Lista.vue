@@ -1,45 +1,42 @@
 <template>
-    <div>
+    <div class="container">
         <HeaderList />
-        <div class="container">
-            <div class="header">
-                <div class="title">
-                    <div class="car-id">
-                        <h3>Id</h3>
-                    </div>
-                    <div class="car-model">
-                        <h3>Modelo</h3>
-                    </div>
-                </div>
-                <div class="act">
-                    <h3>Ações</h3>
-                </div>
-            </div>
-            <div class="rows" v-for="car in carData" :key="car.id">
-                <div class="car-row">
-                    <div class="row">
-                        <div>
-                           <p> {{ car.id }} </p>
-                        </div>
-                        <div>
-                            <p> {{ car.model }} </p>
-                        </div>
-                    </div>
+        <table>
+            <tr class="header">
+                <th>ID</th>
+                <th>Modelo</th>
+                <th>Ações</th>
+            </tr>
+            <tr v-for="car in carData" :key=car.id>
+                <td>
+                    {{ car.id }}
+                </td>
+                <td>
+                    {{ car.model }}
+                </td>
+                <td>
                     <div class="button-box">
                         <button>
-                            <font-awesome-icon class="fa-2x" icon="fa-solid fa-circle-info" @click="openModal()" />
+                            <font-awesome-icon icon="fa-solid fa-circle-info" @click="openModal(car)" />
                         </button>
                         <button>
-                            <font-awesome-icon class="fa-2x" icon="fa-solid fa-pen-to-square" />
+                            <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                         </button>
                         <button>
-                            <font-awesome-icon class="fa-2x" icon="fa-solid fa-trash" />
+                            <font-awesome-icon icon="fa-solid fa-trash" @click="deleteCar()"/>
                         </button>
                     </div>
-                </div>
-            </div>
+                </td>
+            </tr>
+        </table>
+        <div class="back-button">
+            <router-link to="/">
+                <button>
+                    Inicio
+                </button>
+            </router-link>
         </div>
-        <Modal v-show="isModal" @closeModal="isModal = false" :carData="carData" />
+        <Modal v-show="isModal" @closeModal="isModal = false" :carData="currentCar" />
     </div>
 </template>
 
@@ -52,7 +49,8 @@ export default {
 
     data() {
         return {
-            carData: [],
+            carData: {},
+            currentCar: {},
             isModal: false
         };
     },
@@ -68,8 +66,17 @@ export default {
             }
         },
 
-        openModal() {
+        async deleteCar() {
+            try {
+
+            } catch {
+                console.log('erro');
+            }
+        },
+
+        openModal(detail) {
             this.isModal = true;
+            this.currentCar = detail;
         }
     },
 
@@ -85,75 +92,86 @@ export default {
 </script>
 
 <style scoped>
-    .container {
-        margin: 2rem auto;
-        padding: 1rem;
-        width: 90%;
-        border: 1px solid #15151557;
-        border-radius: 5px;
-        z-index: -1;
-    }
+.container {
+    background: dod;
+}
 
-    .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1rem;
-        font-size: 1.2rem;
-    }
+table {
+    margin: 5% auto;
+    width: 90%;
+    padding: 1rem;
+}
 
-    .title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 25%;
-    }
+th,
+tr,
+td {
+    background: var(--main-magenta);
+    color: #fff;
+    font-weight: 700;
+}
 
-    .act {
-        padding: 0 3rem;
-    }
+th {
+    width: 33%;
+    padding: 1rem;
+    text-transform: uppercase;
+}
 
-    .car-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 2rem 1rem;
-        margin: 2rem 0;
-        background: #ded3d3;
-        font-size: 1.1rem;
-        border: none;
-        border-radius: 5px;
-    }
+tr {
+    padding: 1rem;
+    width: 26.6%;
+    background: rgb(237, 237, 237);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, .4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-    .row {
-        display: flex;
-        justify-content: space-between;
-        width: 21%;
-    }
+td {
+    padding: 1rem;
+    transition: 450ms;
+}
 
-    p {
-        font-weight: 700;
-        margin: 0 .25rem;
-        text-transform: uppercase;
-    }
+td:hover {
+    background: #e96982;
+}
 
-    .button-box {
-        display: flex;
-        gap: .50rem;
-    }
+.button-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    gap: .50rem;
+}
 
-    button {
-        padding: .50rem 1rem;
-        border: none;
-        border-radius: 5px;
-        background: #141414cc;
-        color: #fff;
-        font-weight: 700;
-        cursor: pointer;
-        transition: 200ms;
-    }
+.button-box button {
+    padding: .50rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background: #141414cc;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 200ms;
+}
 
-    button:hover {
-        background: #5a5151;
-    }
+.button-box button:hover,
+.back-button button:hover {
+    background: #5a5151;
+}
+
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.back-button button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    background: #141414cc;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 200ms;
+}
 </style>
