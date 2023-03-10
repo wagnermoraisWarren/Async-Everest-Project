@@ -10,25 +10,25 @@
         <div class="column">
             <div class="column-data">
                 <h3>Modelo</h3>
-                <p> {{ carData.model }} </p>
+                <p> {{ modalDetails.model }} </p>
             </div>
             <div class="column-data">
                 <h3>Placa</h3>
-                <p> {{ carData.plate }} </p>
+                <p> {{ modalDetails.plate }} </p>
             </div>
             <div class="column-data">
                 <h3>Cor</h3>
-                <p> {{ carData.color }} </p>
+                <p> {{ modalDetails.color }} </p>
             </div>
         </div>
         <div class="column">
             <div class="column-data">
                 <h3>Ano</h3>
-                <p> {{ carData.year }} </p>
+                <p> {{ modalDetails.year }} </p>
             </div>
             <div class="column-data">
                 <h3>Concessionária</h3>
-                <p> {{ carData.conc }} </p>
+                <p> {{ modalDetails.conc }} </p>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@ export default {
     },
 
     props: {
-        carData: {
+        modalDetails: {
             required: true
         }
     }

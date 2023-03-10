@@ -23,7 +23,7 @@
                             <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                         </button>
                         <button>
-                            <font-awesome-icon icon="fa-solid fa-trash" @click="deleteCar()"/>
+                            <font-awesome-icon icon="fa-solid fa-trash" @click="deleteCar(car)" v-bind="car"/>
                         </button>
                     </div>
                 </td>
@@ -36,41 +36,44 @@
                 </button>
             </router-link>
         </div>
-        <Modal v-show="isModal" @closeModal="isModal = false" :carData="currentCar" />
+        <Modal v-show="isModal" @closeModal="isModal = false" :modalDetails="currentCar" />
     </div>
 </template>
 
 <script>
 import axios from "axios"
 import Modal from "./Modal.vue";
-import HeaderList from "@/components/HeaderList.vue"
+import HeaderList from "@/components/HeaderList.vue";
+import carService from "@/services/carService";
 export default {
     name: "Lista",
 
     data() {
         return {
-            carData: {},
+            carData: [],
             currentCar: {},
-            isModal: false
+            isModal: false,
         };
     },
 
     methods: {
         async getCars() {
             try {
-                const response = await axios.get("http://localhost:8080/api/list");
+                const response = await carService.get("http://localhost:8080/api/list");
                 this.carData = response.data.cars;
                 console.log(response);
-            } catch {
-                console.log('teste');
+            } catch (err) {
+                console.log(err);
             }
         },
 
-        async deleteCar() {
+        async deleteCar(car) {
             try {
-
-            } catch {
-                console.log('erro');
+                await carService.delete(car.id)
+            } catch (err) {
+                console.log(err);
+            } finally {
+                this.getCars();
             }
         },
 
@@ -100,13 +103,15 @@ table {
     margin: 5% auto;
     width: 90%;
     padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, .4);
+    border-radius: 5px;
 }
 
 th,
 tr,
 td {
-    background: var(--main-magenta);
-    color: #fff;
+    background: transparent;
+    color: black;
     font-weight: 700;
 }
 
@@ -114,31 +119,32 @@ th {
     width: 33%;
     padding: 1rem;
     text-transform: uppercase;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, .4);
 }
 
 tr {
     padding: 1rem;
     width: 26.6%;
-    background: rgb(237, 237, 237);
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, .4);
     text-transform: uppercase;
     letter-spacing: 1px;
+    transition: 450ms;
 }
 
 td {
     padding: 1rem;
     transition: 450ms;
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, .4);
 }
 
-td:hover {
-    background: #e96982;
+tr:hover {
+    background: #d7cfd1;
 }
 
 .button-box {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 2rem;
-    gap: .50rem;
+    gap: 1rem;
 }
 
 .button-box button {
