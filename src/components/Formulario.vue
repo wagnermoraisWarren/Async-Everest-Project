@@ -41,6 +41,7 @@
 import axios from "axios";
 import HeaderList from './HeaderList.vue';
 import ConfirmacaoModal from "./ConfirmacaoModal.vue";
+import carService from '@/services/carService';
 export default {
     name: "Formulario",
 
@@ -143,9 +144,9 @@ export default {
     },
 
     methods: {
-      postCar() {
+      async postCar() {
         try {
-          axios
+          await axios
           .post("/api/list", this.carData)
           .then(() => {
             this.confirmacao = true
@@ -156,8 +157,8 @@ export default {
             this.carData.conc = ""
             console.log("Carro cadastrado com sucesso!");
           })
-        } catch {
-            console.log("teste");
+        } catch (err) {
+            console.log(err);
         }
       }
     },
