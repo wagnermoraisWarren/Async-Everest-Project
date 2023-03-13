@@ -15,12 +15,18 @@
                 </li>
             </ul>
         </div>
+        <EmptyList />
     </section>
 </template>
 
 <script>
+import EmptyList from './EmptyList.vue';
 export default {
-    name: "Welcome"
+    name: "Welcome",
+
+    components: {
+        EmptyList
+    }
 }
 </script>
 
