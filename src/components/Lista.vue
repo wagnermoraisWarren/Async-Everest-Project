@@ -37,13 +37,14 @@
             </router-link>
         </div>
         <Modal v-show="isModal" @closeModal="isModal = false" :modalDetails="currentCar" />
+        <Loading v-show="isLoading" />
     </div>
 </template>
 
 <script>
-import axios from "axios"
 import Modal from "./Modal.vue";
 import HeaderList from "@/components/HeaderList.vue";
+import Loading from './Loading.vue';
 import carService from "@/services/carService";
 export default {
     name: "Lista",
@@ -53,33 +54,56 @@ export default {
             carData: [],
             currentCar: {},
             isModal: false,
+            isLoading: false
         };
     },
 
     methods: {
         async getCars() {
-            try {
-                const response = await carService.get("http://localhost:8080/api/list");
-                this.carData = response.data.cars;
-                console.log(response);
-            } catch (err) {
+            try
+            {
+                await carService
+                .get("http://localhost:8080/api/list")
+                .then((response) => {
+                    this.carData = response.data.cars;
+                    console.log(response)
+                });
+            }
+            catch (err) 
+            {
                 console.log(err);
             }
         },
 
         async deleteCar(car) {
-            try {
-                await carService.delete(car.id)
-            } catch (err) {
-                console.log(err);
-            } finally {
+            try 
+            {
+                await carService.delete(car.id);
+            }
+             catch (error) 
+            {
+                console.log(error);
+            } 
+            finally 
+            {
                 this.getCars();
             }
         },
 
         openModal(detail) {
-            this.isModal = true;
             this.currentCar = detail;
+
+            setTimeout(() => {
+                this.isLoading = true
+            }, 0, 1000);
+            
+            setTimeout(() => {
+                this.isLoading = false
+            }, 1100);
+            
+            setTimeout(() => {
+                this.isModal = true 
+            }, 1200);
         }
     },
 
@@ -89,7 +113,8 @@ export default {
 
     components: {
         HeaderList,
-        Modal
+        Modal,
+        Loading
     },
 }
 </script>
